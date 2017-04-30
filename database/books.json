@@ -1,0 +1,42 @@
+{
+  "The Handmaid's Tale": { 
+      "id": 0,
+      /* "title":"The Handmaid's Tale", */
+      "writer":"Margaret Atwood", 
+      "published_date":1985, 
+      "isbn":"038549081", 
+      "cover_art":"https://images.gr-assets.com/books/1489652243l/38447.jpg"
+  },
+  "The Bone Season": { 
+    "id": 1,
+    /*"title":"The Bone Season",*/
+    "writer":"Samantha Shannon", 
+    "published_date":2013, 
+    "isbn":"1620401398", 
+    "cover_art":"https://images.gr-assets.com/books/1487337941l/30199429.jpg"
+  },
+  "To Kill a Mockingbird": { 
+      "id": 2,
+      /*"title":"To Kill a Mockingbird",*/
+      "writer":"Harper Lee", 
+      "published_date":1960, 
+      "isbn":"61120081", 
+      "cover_art":"https://images.gr-assets.com/books/1339392178l/37449.jpg"
+  },
+  "The Alchemist": { 
+      "id": 3,
+      /*"title":"The Alchemist",*/
+      "writer":"Paulo Coehlo", 
+      "published_date":1988, 
+      "isbn":"61122416", 
+      "cover_art":"https://images.gr-assets.com/books/1483412266l/865.jpg"
+    },
+  "Of Mice and Men": { 
+      "id": 4,
+      /*"title":"Of Mice and",*/
+      "writer":"John Steinbeck", 
+      "published_date":1937, 
+      "isbn":"142000671", 
+      "cover_art":"https://images.gr-assets.com/books/1437235233l/890.jpg"
+  }
+}
