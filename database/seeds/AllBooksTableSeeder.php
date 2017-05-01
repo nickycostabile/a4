@@ -15,7 +15,7 @@ class AllBooksTableSeeder extends Seeder
     public function run()
     {
    
-       /* allBooks::insert([
+       allBooks::insert([
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
             'title' => 'Handmaids Tale',
@@ -63,10 +63,10 @@ class AllBooksTableSeeder extends Seeder
             'published_date' => 1937,
             'isbn' => '142000671',
             'cover_art' => 'https://images.gr-assets.com/books/1437235233l/890.jpg'
-        ]); */
+        ]); 
 
 
-       # Load json file into PHP array
+     /*  # Load json file into PHP array
         $books = json_decode(file_get_contents(database_path().'/books.json'), True);
         
         $timestamp = Carbon\Carbon::now()->subDays(count($books));
@@ -79,6 +79,7 @@ class AllBooksTableSeeder extends Seeder
 
             # Find that author in the authors table
             $writer_id = Writer::where('last_name', '=', $lastName)->pluck('id')->first();
+        
         
             # Set the created_at/updated_at for each book to be one day less than
             # the book before. That way each book will have unique timestamps.
@@ -94,6 +95,6 @@ class AllBooksTableSeeder extends Seeder
                 'cover_art' => $allBooks['cover_art'],
             ]);
         }
-
+*/
     }
 }
