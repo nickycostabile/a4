@@ -14,9 +14,7 @@ class allBooks extends Model
     public function writer() {
 
 		
-		# Book belongs to Author
-		# Define an inverse one-to-many relationship.
-		return $this->belongsTo('App\Writer');
+	
 	
 	}
 }

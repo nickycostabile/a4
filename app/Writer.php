@@ -11,8 +11,6 @@ class Writer extends Model
 	 */
     public function all_books() {
     	
-		# Author has many Books
-		# Define a one-to-many relationship.
-		return $this->hasMany('App\allBooks');
+		
 	}
 }

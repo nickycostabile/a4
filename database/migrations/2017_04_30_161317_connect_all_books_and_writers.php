@@ -13,7 +13,7 @@ class ConnectAllBooksAndWriters extends Migration
      */
     public function up()
     { 
-       /* 
+       
         Schema::table('all_books', function (Blueprint $table) {
 
             $table->integer('writer_id')->unsigned();
@@ -21,12 +21,12 @@ class ConnectAllBooksAndWriters extends Migration
             $table->foreign('writer_id')->references('id')->on('writers');
 
         }); 
-        */
+        
     }
 
     public function down()
     { 
-       /* 
+       
         Schema::table('all_books', function (Blueprint $table) {
 
             # ref: http://laravel.com/docs/migrations#dropping-indexes
@@ -35,6 +35,6 @@ class ConnectAllBooksAndWriters extends Migration
 
             $table->dropColumn('writer_id');
         }); 
-        */
+        
     }
 }

@@ -15,6 +15,7 @@ class AllBooksTableSeeder extends Seeder
     public function run()
     {
    
+   /*
        allBooks::insert([
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
@@ -63,18 +64,18 @@ class AllBooksTableSeeder extends Seeder
             'published_date' => 1937,
             'isbn' => '142000671',
             'cover_art' => 'https://images.gr-assets.com/books/1437235233l/890.jpg'
-        ]); 
+        ]); */
 
 
-     /*  # Load json file into PHP array
+     # Load json file into PHP array
         $books = json_decode(file_get_contents(database_path().'/books.json'), True);
         
         $timestamp = Carbon\Carbon::now()->subDays(count($books));
 
         
-        foreach($books as $title => $allBooks) {
+        foreach($books as $title => $book) {
 
-            $name = explode(' ', $allBooks['writer']);
+            $name = explode(' ', $book['writer']);
             $lastName = array_pop($name);
 
             # Find that author in the authors table
@@ -89,12 +90,12 @@ class AllBooksTableSeeder extends Seeder
                 'created_at' => $timestampForThisBook,
                 'updated_at' => $timestampForThisBook,
                 'title' => $title,
-                'writer' => $allBooks['writer'],
-                'published_date' => $allbooks['published_date'],
-                'isbn' => $allBooks['isbn'],
-                'cover_art' => $allBooks['cover_art'],
+                'writer' => $book['writer'],
+                'published_date' => $book['published_date'],
+                'isbn' => $book['isbn'],
+                'cover_art' => $book['cover_art'],
             ]);
         }
-*/
+
     }
 }

@@ -8,6 +8,33 @@ use App\Writer;
 class PracticeController extends Controller {
 
     /**
+     * practice 5
+     */
+    public function practice5() {
+        dump($book->title);
+    }
+
+    /**
+     * practice 4
+     */
+    public function practice4() {
+       # First get a book to update
+        $books = allBooks::where('writer', 'LIKE', '%Harper%')->get();
+        if(!$allBooks) {
+            dump("Book not found, can't update.");
+        }
+        else {
+            foreach($books as $key => $allBooks) {
+                # Change some properties
+                $allBooks->title = 'To Really Kill a Mockingbird';
+                # Save the changes
+                $allBooks->save();
+            }
+            dump('Update complete; check the database to confirm the update worked.');
+        }
+    }
+
+    /**
      * practice 3
      */
     public function practice3() {
