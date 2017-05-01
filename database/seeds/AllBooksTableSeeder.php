@@ -15,7 +15,7 @@ class AllBooksTableSeeder extends Seeder
     public function run()
     {
    
-        allBooks::insert([
+       /* allBooks::insert([
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
             'title' => 'Handmaids Tale',
@@ -63,21 +63,22 @@ class AllBooksTableSeeder extends Seeder
             'published_date' => 1937,
             'isbn' => '142000671',
             'cover_art' => 'https://images.gr-assets.com/books/1437235233l/890.jpg'
-        ]); 
+        ]); */
 
 
-       /* # Load json file into PHP array
-        
+       # Load json file into PHP array
         $books = json_decode(file_get_contents(database_path().'/books.json'), True);
         
-
-        # Initiate a new timestamp we can use for created_at/updated_at fields
         $timestamp = Carbon\Carbon::now()->subDays(count($books));
+
         
-        foreach($books as $title => $book) {
+        foreach($books as $title => $allBooks) {
+
+            $name = explode(' ', $allBooks['writer']);
+            $lastName = array_pop($name);
 
             # Find that author in the authors table
-            $writer = Writer::where('writer', '=', $writer)->pluck('id')->first();
+            $writer_id = Writer::where('last_name', '=', $lastName)->pluck('id')->first();
         
             # Set the created_at/updated_at for each book to be one day less than
             # the book before. That way each book will have unique timestamps.
@@ -87,19 +88,12 @@ class AllBooksTableSeeder extends Seeder
                 'created_at' => $timestampForThisBook,
                 'updated_at' => $timestampForThisBook,
                 'title' => $title,
-                'writer' => $books['writer'],,
-                'published_date' => $books['published_date'],
-                'isbn' => $books['isbn'],
-                'cover_art' => $books['cover_art'],
+                'writer' => $allBooks['writer'],
+                'published_date' => $allbooks['published_date'],
+                'isbn' => $allBooks['isbn'],
+                'cover_art' => $allBooks['cover_art'],
             ]);
         }
-*/
-            
 
-            
-        
-
-
-        
     }
 }

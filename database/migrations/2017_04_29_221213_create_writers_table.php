@@ -18,7 +18,8 @@ class CreateWritersTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('website');
 
         });

@@ -16,16 +16,16 @@ class WritersTableSeeder extends Seeder
         
         # Array of writer data to add
 	    $writers = [
-	        ['Margaret Atwood', 'http://margaretatwood.ca/'],
-	        ['Samantha Shannon', 'http://samantha-shannon.blogspot.com/'],
-	        ['Harper Lee', 'http://tokillamockingbird.com'],
-	        ['Coehlo Paulo', 'http://paulocoelhoblog.com/'],
-	        ['Steinbeck John', 'https://en.wikipedia.org/wiki/John_Steinbeck']
+	        ['Margaret', 'Atwood', 'http://margaretatwood.ca/'],
+	        ['Samantha', 'Shannon', 'http://samantha-shannon.blogspot.com/'],
+	        ['Harper', 'Lee', 'http://tokillamockingbird.com'],
+	        ['Paulo', 'Coehlo', 'http://paulocoelhoblog.com/'],
+	        ['John', 'Steinbeck', 'https://en.wikipedia.org/wiki/John_Steinbeck']
 	    ];
 
 	    $timestamp = Carbon\Carbon::now()->subDays(count($writers));
 
-	    # Loop through each author, adding them to the database
+	    # Loop through each writer, adding them to the database
 	    foreach($writers as $writer) {
 
 	        # Set the created_at/updated_at for each book to be one day less than
@@ -35,8 +35,9 @@ class WritersTableSeeder extends Seeder
 	        Writer::insert([
 	            'created_at' => $timestampForThisWriter,
 	            'updated_at' => $timestampForThisWriter,
-	            'name' => $writer[0],
-	            'website' => $writer[1],
+	            'first_name' => $writer[0],
+	            'last_name' => $writer[1],
+	            'website' => $writer[2],
 	        ]);
 	    }
 

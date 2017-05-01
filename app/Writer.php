@@ -9,7 +9,7 @@ class Writer extends Model
     /**
 	 * Relationship Method
 	 */
-    public function books() {
+    public function all_books() {
     	
 		# Author has many Books
 		# Define a one-to-many relationship.
