@@ -14,58 +14,6 @@ class AllBooksTableSeeder extends Seeder
      */
     public function run()
     {
-   
-   /*
-       allBooks::insert([
-            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'title' => 'Handmaids Tale',
-            'writer' => 'Margaret Atwood',
-            'published_date' => 1985,
-            'isbn' => '038549081',
-            'cover_art' => 'https://images.gr-assets.com/books/1489652243l/38447.jpg'
-        ]);
-
-        allBooks::insert([
-            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'title' => 'The Bone Season',
-            'writer' => 'Samantha Shannon',
-            'published_date' => 2013,
-            'isbn' => '1620401398',
-            'cover_art' => 'https://images.gr-assets.com/books/1487337941l/30199429.jpg'
-        ]);
-
-        allBooks::insert([
-            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'title' => 'To Kill a Mockingbird',
-            'writer' => 'Harper Lee',
-            'published_date' => 1960,
-            'isbn' => '61120081',
-            'cover_art' => 'https://images.gr-assets.com/books/1339392178l/37449.jpg'
-        ]);
-
-         allBooks::insert([
-            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'title' => 'The Alchemist',
-            'writer' => 'Paulo Coehlo',
-            'published_date' => 1988,
-            'isbn' => '61122416',
-            'cover_art' => 'https://images.gr-assets.com/books/1483412266l/865.jpg'
-        ]);
-
-         allBooks::insert([
-            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'title' => 'Of Mice and Men',
-            'writer' => 'John Steinbeck',
-            'published_date' => 1937,
-            'isbn' => '142000671',
-            'cover_art' => 'https://images.gr-assets.com/books/1437235233l/890.jpg'
-        ]); */
-
 
      # Load json file into PHP array
         $books = json_decode(file_get_contents(database_path().'/books.json'), True);
@@ -90,12 +38,11 @@ class AllBooksTableSeeder extends Seeder
                 'created_at' => $timestampForThisBook,
                 'updated_at' => $timestampForThisBook,
                 'title' => $title,
-                'writer' => $book['writer'],
+                'writer_id' => $writer_id,
                 'published_date' => $book['published_date'],
                 'isbn' => $book['isbn'],
                 'cover_art' => $book['cover_art'],
             ]);
         }
-
     }
 }

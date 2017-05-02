@@ -20,7 +20,6 @@ class CreateAllBooksTable extends Migration
             $table->timestamps();
 
             $table->string('title');
-            $table->string('writer');
             $table->integer('published_date');
             $table->integer('isbn');
             $table->string('cover_art');

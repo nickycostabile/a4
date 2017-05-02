@@ -1,6 +1,44 @@
 <?php
 
 	/**
+	 * Admin Confirm Delete
+	 */
+	Route::get('/library/delete/{id?}', 'LibraryController@confirmDelete');
+
+	/**
+	 * Admin Final Delete
+	 */
+	Route::post('/library/delete', 'LibraryController@delete');
+
+	/**
+	  * View Library of Books
+	  * /library
+	*/ 
+	Route::get('/library', 'LibraryController@index');
+
+	/**
+	 * Admin Create A Book
+	 */
+	Route::get('/library/create', 'LibraryController@createNewBook');
+
+	/**
+	 * Admin Save New Book
+	 */
+	Route::post('/library/create', 'LibraryController@saveNewBook');
+
+	/**
+	 * Admin Edit A Book
+	 */
+	Route::get('/library/edit/{id?}', 'LibraryController@edit');
+
+	/**
+	 * Admin Save Edits To A Book
+	 */
+	Route::post('/library/edit', 'LibraryController@saveEdits');
+
+
+
+	/**
 	 * Get Individual Book by id
 	 */
 	Route::get('/library/{id?}', 'LibraryController@view');

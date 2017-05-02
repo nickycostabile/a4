@@ -40,8 +40,5 @@ class WritersTableSeeder extends Seeder
 	            'website' => $writer[2],
 	        ]);
 	    }
-
-
-
     }
 }

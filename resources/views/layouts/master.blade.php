@@ -12,9 +12,22 @@
 </head>
 
 <body>
-
+		@if(Session::get('message') != null)
+		<div id="message">
+	    	<p>{{ Session::get('message') }}</p>
+	    </div>
+	    @endif
+    
 	<header>
-		<h1>better reads</h1>
+		<div id="logo"><img src="/images/a4logo.jpg"></div>
+
+		<nav>
+			<ul>
+				<li><a href="/library">Library of Books</a> |</li>
+				<li><a href="/library/create">Create A Book</a> |</li>
+				<li><a href="/search">Search For A Book</a></li>
+			</ul>
+		</nav>
 	</header>
 	
 	<section>

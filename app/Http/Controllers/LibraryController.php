@@ -4,47 +4,208 @@ use Illuminate\Http\Request;
 
 use App\allBooks;
 use App\Writer;
+use Session;
 
 class LibraryController extends Controller {
 
 	/**
-	 * get /books/{id}
+	 * get /library/delete/{id}
+	 * confirm book deletion
+	 */
+	public function confirmDelete($id) {
+		$book = allBooks::find($id);
+
+		if(!$book) {
+            Session::flash('message', 'The book you requested was not found.');
+            return redirect('/library');
+        }
+
+        return view('library.delete')->with([
+			'book' => $book,
+		]);
+	}
+
+
+	/**
+	 * post 
+	 * actually delete book 
+	 */
+	public function delete(Request $request) {
+
+		$book = allBooks::find($request->id);
+
+		if(!$book) {
+            Session::flash('message', 'The book you requested was not found.');
+            return redirect('/library');
+        }
+
+        $book->delete();
+
+        Session::flash('message', $book->title.' was deleted.');
+        return redirect('/library');
+
+	}
+
+	/**
+	 * get /library/edit/{id}
+	 */
+	public function edit($id) {
+
+		$book = allBooks::find($id);
+
+		$writer = Writer::find($id);
+		$writersForDropdown = Writer::getWritersForDropdown();
+
+		if(is_null($book)) {
+            Session::flash('message', 'The book you requested was not found.');
+            return redirect('/library');
+        }
+
+		return view('library.edit')->with([
+			'id' => $id,
+			'writersForDropdown' => $writersForDropdown,
+			'book' => $book,
+			'writer' => $writer
+			]);
+	}
+
+
+	/**
+	 * post /library/edit
+	 * save edits
+	 */
+	public function saveEdits(Request $request) {
+
+		$this->validate($request, [
+		    'title' => 'required|min:3',
+		    'published_date' => 'required|numeric|min:4',
+		    'isbn' => 'required|numeric',
+		    'cover_art' => 'required|url',
+		    'writer_id' => 'not_in:0'
+	    ]);
+
+	    $book = allBooks::find($request->id);
+
+	    $book->title = $request->title;
+		$book->published_date = $request->published_date;
+		$book->isbn = $request->isbn;
+		$book->cover_art = $request->cover_art;
+		$book->writer_id = $request->writer_id;
+		$book->save();
+
+		Session::flash('message', "The changes made to ".$request->title." have been saved.");
+
+		return redirect('library/'.$request->id);
+	}
+
+
+	/**
+	 * get /library
+	 */
+	public function index(Request $request) {
+		$books = allBooks::orderBy('title')->get();
+    	return view('library.index')->with(['books' => $books]);
+	}
+
+
+	/**
+	 * get /library/new
+	 */
+	public function createNewBook(Request $request) {
+
+		$writersForDropdown = Writer::getWritersForDropdown();
+
+        return view('library.create')->with([
+            'writersForDropdown' => $writersForDropdown
+        ]);
+
+        return view('library.create');
+	}
+
+
+	/**
+	 * post /library/new
+	 */
+	public function saveNewBook(Request $request) {
+
+		$this->validate($request, [
+		    'title' => 'required|min:3',
+		    'published_date' => 'required|numeric|min:4',
+		    'isbn' => 'required|numeric',
+		    'cover_art' => 'required|url',
+		    'writer_id' => 'not_in:0'
+	    ]);
+
+
+		$book = new allBooks();
+		$book->title = $request->title;
+		$book->published_date = $request->published_date;
+		$book->isbn = $request->isbn;
+		$book->cover_art = $request->cover_art;
+		$book->writer_id = $request->writer_id;
+		$book->save();
+
+		Session::flash('message', $request->title.' has been added.');
+
+		return redirect('/library');
+	}
+
+
+	/**
+	 * get /library/{id}
 	 */
 	public function view($id) {
 		$book = allBooks::find($id);
-		if(!$book) {
-			echo 'not a book';
-		}
+		$book_id=$book['id'];
+
+		$writer = Writer::find($id);
+
 		return view('library.view')->with([
 			'book' => $book,
+			'writer' => $writer,
+			'book_id' =>$book_id
 			]);
 	}
+
 
 	/**
 	 * get /search
 	 */
-
 	public function search(Request $request) {
+		
 		$searchResults = [];
 
 		$searchTerm = $request->input('searchTerm', null);
 
+		$book_id = 0;
+
 		if($searchTerm) {
-			 $booksRawData = file_get_contents(database_path().'/books.json');
+			# $booksRawData = file_get_contents(database_path().'/books.json');
+			# $books = json_decode($booksRawData, true);
+			# dd($books);
 
-			 $books = json_decode($booksRawData, true);
+			$books = allBooks::all();
 
-			  foreach($books as $title => $book) {
-			  	if($match) {
-	                $searchResults[$title] = $book;
-	            }
-			  }
+			   foreach($books as $book) {
+			   		#$match = strtolower($title) == strtolower($searchTerm);
+			   		#dump($books->title);
+			   		$title = $book->title;
+			   		$match = strtolower($title) == strtolower($searchTerm);
+			   		#dump($match);
 
+			   		if($match) {
+			   			$searchResults[$title] = $book;	
+			   			$book_id=$book['id'];
+			   		}
+
+
+			   }
 		}
 
 		return view('library.search')->with([
-	        'searchTerm' => $searchTerm,
-	        'searchResults' => $searchResults
-	    ]);
+				'searchTerm' => $searchTerm,
+				'searchResults' => $searchResults,
+				'book_id' => $book_id
+			]);
 	}
 }

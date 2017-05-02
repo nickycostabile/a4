@@ -8,6 +8,23 @@ use App\Writer;
 class PracticeController extends Controller {
 
     /**
+     * practice 6 read querying relationships
+     */
+    public function practice6() {
+
+        # Get the first book as an example
+        $book = allBooks::first();
+
+        # Get the author from this book using the "author" dynamic property
+        # "author" corresponds to the the relationship method defined in the Book model
+        $writer = $book->writer;
+
+        # Output
+        dump($book->title.' was written by '.$writer->first_name.' '.$writer->last_name);
+        dump($book->toArray());
+    }
+
+    /**
      * practice 5
      */
     public function practice5() {
