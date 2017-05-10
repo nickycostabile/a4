@@ -34,6 +34,19 @@
                 @endforeach
             </select>
 
+            <br>
+
+            <label>Shelves:</label>
+            @foreach($shelvesforCheckBoxes as $id => $name)
+                <input
+                    type='checkbox'
+                    value='{{ $id }}'
+                    name='shelves[]'
+                    {{ (in_array($name, $shelvesForThisBook)) ? 'CHECKED' : '' }}
+                >
+                {{ $name }} 
+            @endforeach
+
 		<br><br>
         
         <input type='submit' value='Save Changes'>

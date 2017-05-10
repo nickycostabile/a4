@@ -19,7 +19,7 @@
 	    @endif
     
 	<header>
-		<div id="logo"><img src="/images/a4logo.jpg"></div>
+		<h1 id="name">better<strong>reads</strong></h1>
 
 		<nav>
 			<ul>

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 
 use App\allBooks;
 use App\Writer;
+use App\Shelf;
 use Session;
 
 class LibraryController extends Controller {
@@ -51,10 +52,17 @@ class LibraryController extends Controller {
 	 */
 	public function edit($id) {
 
-		$book = allBooks::find($id);
+		$book = allBooks::with('shelves')->find($id);
 
 		$writer = Writer::find($id);
 		$writersForDropdown = Writer::getWritersForDropdown();
+
+		$shelvesforCheckBoxes = Shelf::getShelvesForCheckboxes();
+
+		$shelvesForThisBook = [];
+	    foreach($book->shelves as $shelf) {
+	        $shelvesForThisBook[] = $shelf->name;
+	    }
 
 		if(is_null($book)) {
             Session::flash('message', 'The book you requested was not found.');
@@ -63,10 +71,12 @@ class LibraryController extends Controller {
 
 		return view('library.edit')->with([
 			'id' => $id,
-			'writersForDropdown' => $writersForDropdown,
 			'book' => $book,
-			'writer' => $writer
-			]);
+			'writer' => $writer,
+			'writersForDropdown' => $writersForDropdown,
+			'shelvesforCheckBoxes' => $shelvesforCheckBoxes,
+			'shelvesForThisBook' => $shelvesForThisBook,
+		]);
 	}
 
 
@@ -91,6 +101,14 @@ class LibraryController extends Controller {
 		$book->isbn = $request->isbn;
 		$book->cover_art = $request->cover_art;
 		$book->writer_id = $request->writer_id;
+	
+	    if($request->shelves) {
+	        $shelves = $request->shelves;
+	    } else {
+	        $shelves = [];
+	    }
+
+	    $book->shelves()->sync($shelves);
 		$book->save();
 
 		Session::flash('message', "The changes made to ".$request->title." have been saved.");

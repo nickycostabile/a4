@@ -8,6 +8,22 @@ use App\Writer;
 class PracticeController extends Controller {
 
     /**
+     * test shelves pivot
+     */
+    public function practice7() {
+        $books = allBooks::with('shelves')->get();
+
+        foreach($books as $book) {
+            dump($book->title.' is tagged with: ');
+            foreach($book->shelves as $shelf) {
+                dump($shelf->name.' ');
+            }
+        }
+    }
+
+ 
+
+    /**
      * practice 6 read querying relationships
      */
     public function practice6() {
@@ -28,7 +44,8 @@ class PracticeController extends Controller {
      * practice 5
      */
     public function practice5() {
-        dump($book->title);
+        $books= allBooks::all();
+        dump($books);
     }
 
     /**

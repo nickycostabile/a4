@@ -28,8 +28,7 @@ label {
 }
 input {
 	display: block;
-	margin-top: 5px;
-}
+	margin-top: 5px;}
 .indexBook {
 	display:block;
 	clear:left;
@@ -86,18 +85,35 @@ nav ul li {
     font-weight: 500;
     font-size: 8.75pt;
     text-decoration: none;
-    color: darkred;
 }
 nav ul li a {
 	text-decoration: none;
-	color: darkred;
 }
 nav ul li a:hover {
 	font-style: italic;
 }
 body {
-	margin-left: 25px;
+	margin-left 25px;
 	margin-top: 15px;
+	font-size: 10.5pt;
+}
+h1#name {
+	margin: 0;
+	font-family: 'Roboto Condensed', Helvetica, sans-serif;
+	text-transform: uppercase;
+	font-weight: 100;
+}
+h1 {
+	font-family: 'Roboto Condensed', Helvetica, sans-serif;
+	text-transform: uppercase;
+	font-weight: 100;	
 }
 
+input[type='checkbox'] {
+    display:inline;
+}
+
+input[type='checkbox'] + label {
+    display:inline;
+}
 
