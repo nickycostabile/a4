@@ -40,6 +40,8 @@ class LibraryController extends Controller {
             return redirect('/library');
         }
 
+        $book->shelves()->detach();
+        
         $book->delete();
 
         Session::flash('message', $book->title.' was deleted.');
