@@ -173,15 +173,21 @@ class LibraryController extends Controller {
 	 * get /library/{id}
 	 */
 	public function view($id) {
-		$book = allBooks::find($id);
+		$book = allBooks::with('shelves')->find($id);
 		$book_id=$book['id'];
 
 		$writer = Writer::find($id);
+		
+	    $shelvesForThisBook = [];
+	    foreach($book->shelves as $shelf) {
+	        $shelvesForThisBook = $shelf->name;
+	    }
 
 		return view('library.view')->with([
 			'book' => $book,
 			'writer' => $writer,
-			'book_id' =>$book_id
+			'book_id' => $book_id,
+			'shelvesForThisBook' => $shelvesForThisBook
 			]);
 	}
 

@@ -15,11 +15,19 @@
 		<p>Writer's Website: <a href="{{ $book->writer->website }}">{{ $book->writer->website }}</a></p>
 		<p>Published: {{ $book->published_date}}</p>
 		<p>ISBN: {{ $book->isbn}}</p>
+		<p>Shelves: 
+
+			@if($shelvesForThisBook != null)
+				{{ $shelvesForThisBook }}
+			@else 
+				None established.
+			@endif
+		</p>
 
 		<p>Added on: {{ $book->created_at }}</p>
 		<p>Last updated: {{ $book->updated_at }}</p>
 	</div>
-	<p class="action-links">
+	<p id="view-action-links">
             <a href='/library/edit/{{ $book_id }}'>Edit</a>
             &nbsp;
             <a href='/library/delete/{{ $book_id }}'>Delete</a>

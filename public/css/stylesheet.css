@@ -5,12 +5,12 @@ html {
 	box-sizing: inherit;
 }
 img.cover_art {
-	max-height: 200px;
+	max-height: 225px;
 	float: left;
 	margin-right: 25px;
 }
 #book-data {
-	margin-top: 25px;
+	margin-top: 0px;
 	font-size: 10pt;
 }
 #book-delete-data {
@@ -19,6 +19,11 @@ img.cover_art {
 }
 .bookResult {
 	font-size: 10pt;	
+}
+p#view-action-links a {
+	font-style: italic;
+	position: relative;
+	top: 10px;
 }
 /* Form Styling */
 label {
@@ -43,7 +48,6 @@ input {
 
 .indexBook p.details {
 	font-style: italic;
-	font-size: .9em;
 	margin: 0;
 }
 .indexBook h3 {
@@ -51,8 +55,7 @@ input {
 }
 .indexBook p.action-links a {
 	font-style: italic;
-	font-size: .9em;
-	color: darkred;
+	color: black;
 }
 .indexBook p.action-links{
 	margin-top: 5px;
